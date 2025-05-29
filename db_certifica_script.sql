@@ -1,5 +1,4 @@
--- -----------------------------------------------------
--- Table `Curso`
+-- Table `db_certifica`.`Curso`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Curso` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -10,12 +9,12 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Usuario`
+-- Table `db_certifica`.`Usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Usuario` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nomeUsuario` VARCHAR(45) NOT NULL,
-  `anoNascimento` DATE NULL,
+  `anoNascimento` DATE NOT NULL,
   `cpf` VARCHAR(45) NOT NULL,
   `senha` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
@@ -25,18 +24,19 @@ CREATE TABLE IF NOT EXISTS `Usuario` (
   `funcao` ENUM('ADMINSITRADOR', 'COORDENADOR', 'ALUNO') NOT NULL,
   `horasValidadas` INT NOT NULL,
   `status` ENUM("ATIVO", "INATIVO", "PENDENTE") NOT NULL,
-  `Curso_id` INT NULL,
+  `Curso_id` INT NOT NULL,
+  `fotoPerfil` VARCHAR(150) NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_Usuario_Curso`
     FOREIGN KEY (`Curso_id`)
-    REFERENCES `Curso` (`id`)
+    REFERENCES `db_certifica`.`Curso` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `TipoAtividade`
+-- Table `db_certifica`.`TipoAtividade`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TipoAtividade` (
   `id` INT NOT NULL,
@@ -47,7 +47,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `CursoAtividade`
+-- Table `db_certifica`.`CursoAtividade`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CursoAtividade` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -58,18 +58,19 @@ CREATE TABLE IF NOT EXISTS `CursoAtividade` (
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_CursoAtividade_TipoAtividade1`
     FOREIGN KEY (`TipoAtividade_id`)
-    REFERENCES `TipoAtividade` (`id`)
+    REFERENCES `db_certifica`.`TipoAtividade` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_CursoAtividade_Curso1`
     FOREIGN KEY (`Curso_id`)
-    REFERENCES `Curso` (`id`)
+    REFERENCES `db_certifica`.`Curso` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
 -- -----------------------------------------------------
--- Table `Comprovante`
+-- Table `db_certifica`.`Comprovante`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Comprovante` (
   `id` INT NOT NULL,
@@ -82,12 +83,17 @@ CREATE TABLE IF NOT EXISTS `Comprovante` (
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_Comprovante_Usuario1`
     FOREIGN KEY (`Usuario_id`)
-    REFERENCES `Usuario` (`id`)
+    REFERENCES `db_certifica`.`Usuario` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Comprovante_CursoAtividade1`
     FOREIGN KEY (`CursoAtividade_id`)
-    REFERENCES `CursoAtividade` (`id`)
+    REFERENCES `db_certifica`.`CursoAtividade` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+
+
+INSERT INTO Usuario (nomeUsuario,anoNascimento, cpf, senha, email,telefone,endereco,funcao,status) 
+  VALUES ('admin', '01-07-1980', '000.000.000-00', 'senha123', 'admin@gmail.com','(11) 90000-0000','Rua Exemplo, 123 - Cidade - Estado','ADMINISTRADOR','ATIVO');
