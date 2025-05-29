@@ -78,7 +78,6 @@ CREATE TABLE IF NOT EXISTS `Comprovante` (
   `comentario` VARCHAR(45) NULL,
   `arquivo` VARCHAR(45) NOT NULL,
   `Usuario_id` INT NOT NULL,
-  `Usuario_Curso_id` INT NOT NULL,
   `CursoAtividade_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_Comprovante_Usuario1`
