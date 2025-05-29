@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `Usuario` (
   `funcao` ENUM('ADMINSITRADOR', 'COORDENADOR', 'ALUNO') NOT NULL,
   `horasValidadas` INT NOT NULL,
   `status` ENUM("ATIVO", "INATIVO", "PENDENTE") NOT NULL,
-  `Curso_id` INT NOT NULL,
+  `Curso_id` INT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_Usuario_Curso`
     FOREIGN KEY (`Curso_id`)
