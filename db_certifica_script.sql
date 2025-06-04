@@ -14,17 +14,17 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `Usuario` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nomeUsuario` VARCHAR(45) NOT NULL,
-  `anoNascimento` DATE NOT NULL,
+  `dataNascimento` DATE NULL,
   `cpf` VARCHAR(45) NOT NULL,
   `senha` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `telefone` VARCHAR(15) NULL,
   `endereco` VARCHAR(45) NULL,
   `codigoMatricula` INT NULL,
-  `funcao` ENUM('ADMINSITRADOR', 'COORDENADOR', 'ALUNO') NOT NULL,
-  `horasValidadas` INT NOT NULL,
+  `funcao` ENUM('ADMINISTRADOR', 'COORDENADOR', 'ALUNO') NOT NULL,
+  `horasValidadas` INT NULL,
   `status` ENUM("ATIVO", "INATIVO", "PENDENTE") NOT NULL,
-  `Curso_id` INT NOT NULL,
+  `Curso_id` INT NULL,
   `fotoPerfil` VARCHAR(150) NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_Usuario_Curso`
@@ -95,5 +95,5 @@ ENGINE = InnoDB;
 
 
 
-INSERT INTO Usuario (nomeUsuario,anoNascimento, cpf, senha, email,telefone,endereco,funcao,status) 
-  VALUES ('admin', '01-07-1980', '000.000.000-00', 'senha123', 'admin@gmail.com','(11) 90000-0000','Rua Exemplo, 123 - Cidade - Estado','ADMINISTRADOR','ATIVO');
+INSERT INTO Usuario (nomeUsuario, cpf, senha, email,telefone,endereco,funcao,status) 
+  VALUES ('admin', '000.000.000-00', 'senha123', 'admin@gmail.com','(11) 90000-0000','Rua Exemplo, 123 - Cidade - Estado','ADMINISTRADOR','ATIVO');
